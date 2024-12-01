@@ -1,0 +1,240 @@
+@media (max-width: 1345px) {
+    .menu-container {
+        width: auto;
+        overflow: hidden;
+    }
+    .allmenucard {
+        width: 400px;
+        /* background-color: red; */
+    }
+}
+@media (max-width: 585px) {
+    .menu-container {
+        width: auto;
+        overflow: hidden;
+    }
+    .allmenucard {
+        width: 350px;
+    }
+    .active-section .tabs {
+        width: 300px;
+        margin-left: 15px;
+    }
+    .active-section h4 {
+        font-size: 12px;
+    }
+    .active-section .contain .cross {
+        margin-left: 180px;
+    }
+    .active-section .meal-content {
+        width: 300px;
+        margin-left: 15px;
+    }
+    .active-section .meal-content .meal-details {
+        width: 300px;
+    }
+    .active-section .meal-content .meal-details select {
+        width: 120px;
+        font-size: 10px;
+    }
+
+    
+    .inactive-section .tabs {
+        width: 300px;
+        margin-left: 15px;
+    }
+    .inactive-section h4 {
+        font-size: 12px;
+    }
+    .inactive-section .contain .cross {
+        margin-left: 180px;
+    }
+    .inactive-section .meal-content {
+        width: 300px;
+        margin-left: 15px;
+    }
+    .inactive-section .meal-content .meal-details {
+        width: 300px;
+    }
+    .inactive-section .meal-content .meal-details select {
+        width: 120px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 385px) {
+    .menu-container {
+        width: 400px;
+        overflow: hidden;
+    }
+    .allmenucard {
+        width: 300px;
+        /* background-color: red; */
+        overflow-x: hidden;
+    }
+    .active-section .breakfastmeal {
+        width: 300px;
+        margin-left: 0px;
+    }
+    .active-section .breakfastmeal .fleximg-meal {
+        width: 180px;
+    }
+    .active-section .detail-flex{
+        width: 300px;
+        margin-left: -40px;
+    }
+    .active-section .tabs {
+        width: 250px;
+        margin-left: 25px;
+    }
+    .active-section h4 {
+        font-size: 10px;
+    }
+    .active-section .contain .cross {
+        margin-left: 120px;
+    }
+    .active-section .meal-content {
+        width: 250px;
+        margin-left: 25px;
+    }
+    .active-section .meal-content .meal-details {
+        width: 250px;
+    }
+    .active-section .flex select {
+        width: 100px;
+        font-size: 10px;
+    }
+    .active-section .suggestions {
+        margin-left: 35px;
+    }
+    
+    .inactive-section .breakfastmeal {
+        width: 300px;
+    }
+    .inactive-section .detail-flex{
+        width: 300px;
+        margin-left: -20px;
+    }
+    .inactive-section .tabs {
+        width: 250px;
+        margin-left: 10px;
+    }
+    .inactive-section h4 {
+        font-size: 12px;
+    }
+    .inactive-section .contain .cross {
+        margin-left: 120px;
+    }
+    .inactive-section .meal-content {
+        width: 250px;
+        margin-left: 10px;
+    }
+    .inactive-section .meal-content .meal-details {
+        width: 250px;
+    }
+    .inactive-section .flex select {
+        width: 100px;
+        font-size: 10px;
+    }
+    .inactive-section .suggestions {
+        margin-left: 35px;
+    }
+}
+
+@media (max-width: 355px) {
+    .menu-container {
+        width: auto;
+        overflow: hidden;
+    }
+    .active-section .breakfastmeal {
+        width: 260px;
+        margin-left: 0px;
+    }
+    .active-section .breakfastmeal video {
+        width: 100px;
+    }
+    .active-section .breakfastmeal .fleximg-meal {
+        width: 240px;
+    }
+    .active-section .breakfastmeal .search-input {
+        width: 200px;
+    }
+    .active-section .breakfastmeal .suggestions1 {
+        margin-left: 20px;
+        width: 200px;
+    }
+    .active-section .detail-flex{
+        width: 280px;
+        margin-left: 0px;
+    }
+    .active-section .tabs {
+        width: 250px;
+        margin-left: 0px;
+    }
+    .active-section h4 {
+        font-size: 10px;
+    }
+    .active-section .contain .cross {
+        margin-left: 130px;
+    }
+    .active-section .meal-content {
+        width: 250px;
+        margin-left: 0;
+    }
+    .active-section .meal-content .meal-details {
+        width: 260px;
+    }
+    .active-section .flex select {
+        width: 100px;
+        font-size: 10px;
+    }
+    .active-section .suggestions {
+        margin-left: 10px;
+    }
+    
+    .inactive-section .breakfastmeal {
+        width: 260px;
+        margin-left: 0px;
+    }
+    .inactive-section .breakfastmeal video {
+        width: 100px;
+    }
+    .inactive-section .breakfastmeal .fleximg-meal {
+        width: 240px;
+    }
+    .inactive-section .breakfastmeal .search-input {
+        width: 200px;
+    }
+    .inactive-section .breakfastmeal .suggestions1 {
+        margin-left: 20px;
+        width: 200px;
+    }
+    .inactive-section .detail-flex{
+        width: 280px;
+        margin-left: 0px;
+    }
+    .inactive-section .tabs {
+        width: 250px;
+        margin-left: 0px;
+    }
+    .inactive-section h4 {
+        font-size: 10px;
+    }
+    .inactive-section .contain .cross {
+        margin-left: 130px;
+    }
+    .inactive-section .meal-content {
+        width: 250px;
+        margin-left: 0;
+    }
+    .inactive-section .meal-content .meal-details {
+        width: 260px;
+    }
+    .inactive-section .flex select {
+        width: 100px;
+        font-size: 10px;
+    }
+    .inactive-section .suggestions {
+        margin-left: 10px;
+    }
+}

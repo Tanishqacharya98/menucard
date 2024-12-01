@@ -1,0 +1,465 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.menu-container {
+  font-family: Arial, sans-serif;
+  /* overflow: hidden;  */
+}
+
+.allmenucard {
+  width: 100%;
+  max-width: 600px;
+  overflow-y: auto; /* Hide scrollbar for smooth experience */
+  height: 100vh; /* Ensure full height display */
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 8px;
+  scroll-behavior: smooth;
+}
+
+.menu-section {
+  flex: 1 0 100%;
+  height: 100%; /* Ensure full height */
+  padding: 20px; /* Ensure sufficient padding for visibility */
+  transition: opacity 0.8s ease; /* Smooth opacity transition */
+  opacity: 0.7;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  align-items: center;
+}
+
+.active-section {
+  opacity: 1;
+}
+
+.inactive-section {
+  opacity: 0.5;
+}
+
+.menu-card {
+  width: 100%; /* Ensure full width */
+  max-width: 500px; /* Adjust maximum width as needed */
+  height: 100%; /* Ensure full height */
+  border: 1px solid #ccc; /* Add a border for visual distinction */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.title h1 {
+  font-size: 24px;
+  font-family: sans;
+  color: #093414;
+  font-weight: 600;
+  padding-top: 20px;
+}
+.daysselect {
+  /* position: fixed; */
+  margin-left: 90px;
+  width: 360px;
+}
+.breakfastmeal {
+  width: 300px;
+  height: fit-content;
+  padding: 10px;
+  margin: auto;
+  position: relative;
+  /* margin-top: 40px; */
+  /* background-color: #e8e4e4; */
+  background-color: #093414;
+  color: #fff;
+  /* border: 2px solid #fff; */
+  border: none;
+  font-family: serif;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  transition: height 0.3s ease;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.breakfastmeal.active {
+transform: scale(1.2);
+box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.breakfastmeal h1 {
+  font-size: 20px;
+  text-align: center;
+}
+.breakf{
+  margin: auto;
+  text-align: center;
+}
+
+.breakfastmeal .fleximg-meal {
+  display: flex;
+  width: 300px;
+  gap: 10px;
+  margin-top: 10px;
+  border: 3px solid #fff;
+  align-items: center;
+}
+.breakfastmeal .fleximg-meal img {
+  width: 100px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+}
+.breakfastmeal .fleximg-meal .mealdetails {
+  width: 150px;
+  height: fit-content;
+}
+.breakfastmeal .fleximg-meal .mealdetails h1, p {
+  font-size: 16px;
+}
+.breakfastmeal .searchcontainer input {
+  border: none;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  width: 250px;
+  padding: 8px;
+}
+.breakfastmeal .arrowdown {
+  margin: auto;
+  font-size: 40px;
+  cursor: pointer;
+}
+.detail-flex {
+  /* display: flex; */
+  position: relative;
+  /* background-color: #fff; */
+  /* background-color: #047592; */
+  width: 290px;
+  margin: auto;
+  color: #000;
+  gap: 10px;
+  /* margin-top: 20px; */
+}
+.contain .cross {
+  color: #f00e0e;
+  margin: auto;
+  margin-top: 10px;
+  position: relative;
+}
+.detail-flex h3 {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: serif;
+  color: #fff;
+}
+.detail-flex .onepotmeal1 {
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.5);
+  width: 160px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.detail-flex .onepotmeal1 select {
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  width: 140px;
+  padding: 3px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.detail-flex .sepratemeal1 {
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.5);
+  width: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.detail-flex .sepratemeal1 select {
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  width: 140px;
+  padding: 3px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+.detail-flex .parathameal1 {
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.5);
+  width: 200px;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.detail-flex .parathameal1 select {
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  width: 140px;
+  padding: 3px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+.detail-flex .search-input {
+  width: 350px;
+  /* margin-left: 120px; */
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  border: none;
+  font-size: 12px;
+  padding: 8px;
+  border-radius: 2px;
+  margin-bottom: 8px;
+}
+.detail-flex p {
+  font-size: 12px;
+}
+.app {
+  font-family: Arial, sans-serif;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.search-box .search-input {
+  width: 250px;
+  padding: 20px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  border: none;
+}
+
+.suggestions1 {
+  width: 280px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 150px;
+  overflow-y: auto;
+  background-color: #fff;
+  position: absolute;
+  z-index: 1000;
+  color: #000;
+}
+
+.suggestion-item1 {
+  padding: 10px;
+  cursor: pointer;
+  color: #000;
+}
+
+.suggestion-item1:hover {
+  background-color: #f0f0f0;
+}
+
+/* .meal-details {
+  width: 200px;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  color: #000;
+} */
+/* .showonepot {
+  width: 460px;
+  margin: auto;
+  margin-top: 20px;
+  position: absolute;
+  height: fit-content;
+  padding: 10px;
+  background-color: rgb(209, 206, 206);
+  align-items: center;
+}
+*/
+
+.tabs {
+  width: 260px;
+  display: flex;
+  justify-content: space-around;
+  cursor: pointer;
+}
+.tabs h4 {
+  font-size: 10px;
+}
+.tab {
+  padding: 10px;
+  text-align: center;
+  flex: 1;
+  background-color: lightgray;
+}
+
+.meal-content {
+  /* padding: 20px; */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url('../../../public/assets/images/spring-roll-6760871_1280.jpg');
+  object-fit: fill;
+  background-size: cover;
+  width: 260px;
+}
+.meal-content .meal-details {
+  width: 450px;
+  padding: 20px;
+  margin: auto;
+}
+
+.meal-options-toggle {
+  cursor: pointer;
+  text-align: center;
+}
+
+.arrow-icon {
+  font-size: 20px;
+}
+
+.meal-options-details {
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+/* display */
+ .contents {
+  background-color: #047592;
+  color: #fff;
+  display: none;
+}
+.active-content {
+  display: block;
+}
+.active-tabs {
+  background-color: white;
+  color: #000;
+}
+
+.active {
+  background-color: #047592;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  transform: scale(1);
+}
+.inactive {
+  opacity: 0.6;
+  color: #047592;
+  font-size: 16px;
+} 
+/*.allmenucard {
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease;
+}
+
+/* Active section styling */
+/* .active-section {
+  width: 350px;
+  margin: auto;
+  transition: 0.5s;
+  transform: scale(1.15);
+}  
+
+.inactive-section {
+  transform: scale(0.8);
+  opacity: 0.7;
+}
+@keyframes zoomIn {
+  0% {
+      transform: scale(1.05); 
+      opacity: 0;
+  }
+  100% {
+      transform: scale(1); 
+      opacity: 1;
+  }
+} */
+
+
+
+.menu-container {
+font-family: Arial, sans-serif;
+}
+
+.allmenucard {
+scroll-behavior: smooth; /* Smooth scrolling */
+position: relative;
+perspective: 1000px; /* Enable 3D effect */
+scrollbar-width: none;
+overflow: hidden;
+/* border: 2px solid red; */
+width: 400px;
+height: auto;
+margin: auto;
+}
+
+.menu-section {
+width: fit-content;
+height: 400px; /* Adjust as per design */
+display: flex;
+justify-content: center;
+align-items: center;
+margin: auto;
+transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease; /* Smooth transitions */
+opacity: 0.5; /* Dim inactive sections */
+transform: scale(0.9) rotateX(15deg); /* Slight tilt for inactive */
+/* background-color: #f0f0f0; */
+}
+
+.active-section {
+opacity: 1; /* Fully visible */
+transform: scale(1.1) rotateX(0deg); /* Zoomed-in effect */
+z-index: 10; /* Bring forward */
+/* background-color: #ffe4b5;  */
+margin-top: -20px;
+}
+.active-section .meal-content .meal-details {
+width: 260px;
+margin-left: 0;
+}
+.active-section .flex select {
+width: 90px;
+font-size: 10px;
+padding: 6px;
+}
+.active-section .detail-flex .search-input {
+width: 200px;
+}
+.active-section .suggestions {
+margin-left: 70px;
+}
+.active-section .contain .cross {
+/* margin-left: 200px; */
+}
+.inactive-section {
+height: fit-content;
+z-index: 1; /* Push back */
+background-color: #f0f0f0; /* Default background color */
+}
+.inactive-section .meal-content {
+width: 260px;
+}
+.inactive-section .meal-content .meal-details {
+width: 260px;
+margin-left: 0;
+}
+.inactive-section .flex select {
+width: 90px;
+padding: 6px;
+font-size: 10px;
+}
+.inactive-section .detail-flex .search-input {
+width: 200px;
+}
+.inactive-section .suggestions {
+margin-left: 70px;
+}
+.inactive-section .contain .cross {
+/* margin-left: 200px; */
+}
+
+.breakf {
+border: 2px solid red;
+width: 320px;
+height: fit-content;
+padding: 10px;
+margin: auto;
+position: relative;
+/* margin-top: 40px; */
+/* background-color: #e8e4e4; */
+background-color: #093414;
+color: #fff;
+border: 2px solid #fff;
+/* border: none; */
+font-family: serif;
+box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+border-radius: 6px;
+transition: height 0.3s ease;
+transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.breakf h1 {
+color: #fff;
+font-size: 24px;
+}

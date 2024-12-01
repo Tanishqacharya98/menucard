@@ -1,0 +1,167 @@
+.top-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .day-btn {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .day-btn.active {
+    background-color: lightblue;
+    font-weight: bold;
+  }
+  
+  .meal-box {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    cursor: pointer;
+    width: 300px;
+  }
+  
+  .meal-box.active {
+    border-color: blue;
+  }
+  
+  .dropdown {
+    background-color: #f0f0f0;
+    margin: 10px 0;
+  }
+  
+  .suggestions {
+    background-color: #f9f9f9;
+    list-style: none;
+    padding: 5px;
+  }
+  
+  .suggestions li {
+    cursor: pointer;
+  }
+  
+  .meal-details {
+    margin-top: 20px;
+  }
+  .dropdown {
+    background-color: gray;
+    width: 200px;
+    height: fit-content;
+    padding: 10px;
+  }
+  input {
+    border: 1px solid #000;
+    margin-top: 10px;
+  }
+  .top-bar button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    background-color: lightgray;
+    cursor: pointer;
+  }
+  
+  .top-bar button.active-day {
+    background-color: orange;
+    color: white;
+  }
+  
+  .meal-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+  }
+  
+  .meal-box.active {
+    border: 2px solid orange;
+    background-color: #fff7e6;
+  }
+  
+  .suggestions {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .suggestions li {
+    padding: 5px;
+    cursor: pointer;
+    background-color: lightgray;
+    margin-bottom: 2px;
+  }
+  
+  .suggestions li:hover {
+    background-color: orange;
+    color: white;
+  }
+  .top-bar button {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: lightgray;
+    cursor: pointer;
+  }
+  
+  .top-bar button.active-day {
+    background-color: orange;
+    color: white;
+  }
+  
+  .meal-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+    cursor: pointer;
+  }
+  
+  .meal-box.active {
+    border: 2px solid orange;
+    background-color: #fff7e6;
+  }
+  
+  .inactive-box {
+    color: gray;
+    font-style: italic;
+  }
+  .top-bar button {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: lightgray;
+    cursor: pointer;
+  }
+  
+  .top-bar button.active-day {
+    background-color: orange;
+    color: white;
+  }
+  
+  .meal-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .meal-box.active {
+    border: 2px solid orange;
+    background-color: #fff7e6;
+  }
+  
+  .meal-box h2 {
+    margin: 0 0 10px;
+  }
+  
+  .day-meals {
+    margin-top: 10px;
+  }
+  
+  .day-meals p {
+    font-size: 14px;
+    color: gray;
+  }
+    
