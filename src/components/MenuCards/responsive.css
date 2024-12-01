@@ -77,6 +77,20 @@
     }
 }
 
+@media (max-width: 425px) {
+    .fitcard {
+        width: 340px !important;
+    }
+    .breakf {
+        margin-left: -33px;
+    }
+    .list {
+        gap: 10px !important;
+    }
+    .list a {
+        font-size: 13px;
+    }
+}
 @media (max-width: 385px) {
     
     .fitcard {
@@ -177,6 +191,25 @@
 }
 
 @media (max-width: 355px) {
+    .fitcard {
+        width: 290px !important;
+    }
+    .breakf {
+        width: 260px !important;
+    }
+    video {
+        width: 95px;
+    }
+    .list a {
+        font-size: 11px;
+    }
+    .search-box .search-input {
+        width: 200px;
+        margin-left: -60px;
+    }
+    .breakfastmeal .arrowdown {
+        margin-left: 90px;
+    }
     .menu-container {
         width: auto;
         overflow: hidden;
