@@ -62,7 +62,42 @@
     }
 }
 
+@media (max-width: 485px) {
+    .fitcard {
+        width: 380px !important;
+    }
+    .breakf {
+        margin-left: -10px;
+    }
+    .list {
+        gap: 12px !important;
+    }
+    .list a {
+        font-size: 14px;
+    }
+}
+
 @media (max-width: 385px) {
+    
+    .fitcard {
+        width: 330px !important;
+    }
+    .breakf {
+        margin-left: -28px;
+        width: 300px;
+    }
+    .list {
+        gap: 10px !important;
+    }
+    .list a {
+        font-size: 12px;
+    }
+    .breakfastmeal .fleximg-meal {
+        width: 280px;
+    }
+    video {
+        width: 120px;
+    }
     .menu-container {
         width: 400px;
         overflow: hidden;

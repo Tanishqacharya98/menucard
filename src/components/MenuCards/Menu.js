@@ -60,6 +60,7 @@ const Menu = () => {
         }}
       >
         <ul
+        className="list"
           style={{
             listStyle: "none",
             display: "flex",
@@ -121,6 +122,7 @@ const Menu = () => {
       >
         {sections.map((section) => (
           <div
+          className="fitcard"
             key={section.id}
             id={section.id}
             data-section
