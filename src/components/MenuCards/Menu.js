@@ -4,7 +4,7 @@ import Snacks from "./Snacks";
 import Lunch from "./Lunch";
 import EveningSnacks from "./EveningSnacks";
 import Dinner from "./Dinner";
-// import './Menu.css'
+import './Menu.css'
 
 const Menu = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -66,15 +66,16 @@ const Menu = () => {
             justifyContent: "center",
             margin: 0,
             padding: 0,
-            gap: "8px",
+            gap: "15px",
           }}
         >
           {sections.map((section) => (
             <li
               key={section.id}
               style={{
-                fontSize: "12px",
-                transform: activeSection === section.id ? "scale(1.1)" : "scale(1)",
+                fontSize: "16px",
+                fontFamily: 'Arial',
+                transform: activeSection === section.id ? "scale(1.2)" : "scale(1)",
                 transition: "transform 0.3s ease, color 0.3s ease",
                 cursor: "pointer",
                 textAlign: "center",
@@ -88,8 +89,8 @@ const Menu = () => {
                   color: activeSection === section.id ? "#61dafb" : "#fff",
                   textDecoration: "none",
                   fontWeight: "bold",
-                  textShadow: activeSection === section.id ? "0 0 10px #61dafb, 0 0 20px #61dafb" : "none",
-                  letterSpacing: "2px",
+                  textShadow: activeSection === section.id ? "0 0 0px #61dafb, 0 0 0px #61dafb" : "none",
+                  letterSpacing: "0.6px",
                   transform: activeSection === section.id ? "rotateY(10deg)" : "none",
                   transition: "all 0.3s ease",
                   // border: "3px solid #fff",  // White border
@@ -106,7 +107,7 @@ const Menu = () => {
       {/* Sections */}
       <div
         style={{
-          marginTop: "90px",
+          marginTop: "60px",
           padding: "20px",
           backgroundColor: "#f0f0f5",
           scrollBehavior: "smooth",
@@ -126,11 +127,11 @@ const Menu = () => {
             style={{
               minHeight: "350px",
               width: "80%",
-              maxWidth: "1000px",
+              maxWidth: "fit-content",
               borderRadius: "15px",
               margin: "30px 0",
               padding: "40px",
-              background: activeSection === section.id ? "#018749" : "linear-gradient(145deg, #ffffff, #e6e6e6)",
+              background: activeSection === section.id ? "#093414" : "linear-gradient(145deg, #a8e6cf, #dcedc1)",
               boxShadow: activeSection === section.id
                 ? "0px 10px 30px rgba(0, 0, 0, 0.3)"
                 : "10px 10px 20px #c6c6c6, -10px -10px 20px #ffffff",
@@ -142,13 +143,14 @@ const Menu = () => {
               border: "3px solid #fff",  // White border
             }}
           >
-            <h2
+            <h1
               style={{
                 marginBottom: "25px",
-                fontSize: "16px",
+                fontSize: "28px",
+                fontFamily: 'Open sans',
                 fontWeight: "bold",
-                color: activeSection === section.id ? "#FFC72C" : "#282c34",
-                textShadow: activeSection === section.id ? "0 0 10px #61dafb, 0 0 20px #61dafb" : "none",
+                color: activeSection === section.id ? "#fff" : "#282c34",
+                textShadow: activeSection === section.id ? "0 0 10px #61dafb, 0 0 0px #7ad1f7, 0 0 0px #a1e0f7"  : "none",
                 letterSpacing: "2px",
                 transform: activeSection === section.id ? "rotateY(10deg)" : "none",
                 transition: "all 0.3s ease",
@@ -157,7 +159,7 @@ const Menu = () => {
               }}
             >
               {section.id}
-            </h2>
+            </h1>
             {section.Component}
           </div>
         ))}
