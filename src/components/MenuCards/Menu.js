@@ -80,6 +80,8 @@ const Menu = () => {
                 transition: "transform 0.3s ease, color 0.3s ease",
                 cursor: "pointer",
                 textAlign: "center",
+                borderRight: "2px solid #fff",
+                paddingRight: '6px'
                 // border: "3px solid #fff",  // White border
 
               }}

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { FaPlus } from 'react-icons/fa';
 import { ImCross } from 'react-icons/im';
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 // import './parent.css'
@@ -345,6 +346,38 @@ const handleMouseLeave = () => {
 
 const cardRef = useRef(null);
 
+const [showPopup, setShowPopup] = useState(false); 
+
+const handleSelectChange = (e) => {
+  if (e.target.value === "add new") {
+    setShowPopup(true);
+  }
+};
+
+
+const closePopup = () => {
+  setShowPopup(false);
+};
+
+
+  const [options, setOptions] = useState(["Grams"]); // चयन विकल्प
+  const [newOption, setNewOption] = useState(""); // नई वैल्यू स्टेट
+  const [selectedOption, setSelectedOption] = useState(""); 
+
+
+  const addNewOption = () => {
+    if (newOption.trim() !== "") {
+      const updatedOptions = [...options];
+      updatedOptions.splice(updatedOptions.indexOf("add new"), 0, newOption); // "Add new" से पहले जोड़ें
+      setOptions(updatedOptions); // विकल्प अपडेट करें
+      setSelectedOption(newOption); // नई वैल्यू को चयनित करें
+      closePopup(); // पॉपअप बंद करें
+    }
+  };
+
+
+
+
 // useEffect(() => {
 //   const handleScroll = () => {
 //     if (cardRef.current) {
@@ -373,18 +406,67 @@ const cardRef = useRef(null);
               muted
               width={150}
             ></video>
+
             {selectedDay ? (
                   <div className="getMeal" style={{marginTop: '20px', fontSize: '12px'}}>
                     <h3>Day {selectedDay} Meal</h3>
                     <p>Meal: {selectedDayMeal}</p> {/* Only meal name displayed */}
                   </div>
                 ) : (
+                  <>
                   <p style={{ marginTop: '20px', fontSize: '12px', fontFamily: 'serif' }}>
                     Meal:-<br />
                     {renderSelectedMeals()}
                   </p>
+                  </>
+                  
               )}
           </div>
+          
+          <div className="box flex w-40 m-auto mt-4 justify-between items-center">
+                  {/* <button className='bg-white text-black text-sm pl-2 pr-2'><FaPlus className='text-sm float-left mt-1 mr-1' /> Grams</button> */}
+                  <img src="assets/images/bowl.png" alt="not found" className='w-16 animate-slideInTop' />
+                  <select className='text-black'  value={selectedOption} onChange={handleSelectChange}>
+                     {options.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                    <option value="add new">Add new</option>
+                  </select>
+
+                  {showPopup && (
+        <div
+          className="fixed top-0 left-22 w-full h-full bg-transparent bg-opacity-50 flex justify-center items-center"
+        >
+          <div className="bg-white p-4 rounded shadow-md w-96">
+          <div className="flex justify-between items-center mb-2">
+            <h2 className="text-lg font-bold  text-black">Add Grams</h2>
+            <button
+                className="px-2 py-2 text-red-500 text-md rounded mr-2"
+                onClick={closePopup}
+              >
+                <ImCross />
+              </button>
+              </div>
+            <input
+              type="text"
+              className="border p-2 w-full mb-4 text-black"
+              placeholder="Enter Gram"
+              value={newOption}
+              onChange={(e) => setNewOption(e.target.value)}
+            />
+            
+              <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={addNewOption}>
+                Add
+              </button>
+            </div>
+          </div>
+      )}
+
+      {/* grams  popup end */}
+          </div>
+
           {!showMealOptions && (
             <div className="search-box">
               <input
@@ -476,8 +558,11 @@ const cardRef = useRef(null);
           Meal:-<br />
           {renderSelectedOnePotMeals()}
         </p>
-        </div> 
         </div>
+        </div>
+        
+        {/* add grams */}
+        
         <div className="search w-[300px]h-40">
           
         <input
