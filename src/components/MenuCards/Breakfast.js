@@ -185,11 +185,137 @@ const [activeMeal, setActiveMeal] = useState(''); // Active meal track karne ke 
   // Render selected meals
   const renderSelectedMeals = () => {
     if (selectedMeal) {
-      return <p>You selected: {selectedMeal}</p>;
+      return <p>You selected: {selectedMeal}
+      <div className="box w-auto m-auto mt-4 justify-between items-center">
+                  {/* <img src="assets/images/bowl.png" alt="not found" className='w-16 animate-slideInTop' /> */}
+                  <select className='text-black'  value={selectedOption} onChange={handleSelectChange}>
+                     {options.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                    <option value="add new">Add new</option>
+                  </select>
+
+                  {showPopup && (
+        <div
+          className="fixed top-0 left-24 w-full h-full bg-transparent bg-opacity-50 flex justify-center items-center"
+        >
+          <div className="bg-white p-4 rounded shadow-md w-96">
+          <div className="flex justify-between items-center mb-2">
+            <h2 className="text-lg font-bold  text-black">Add Grams</h2>
+            <button
+                className="px-2 py-2 text-red-500 text-md rounded mr-2"
+                onClick={closePopup}
+              >
+                <ImCross />
+              </button>
+              </div>
+            <input
+              type="text"
+              className="border p-2 w-full mb-4 text-black"
+              placeholder="Enter Gram"
+              value={newOption}
+              onChange={(e) => setNewOption(e.target.value)}
+            />
+            
+              <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={addNewOption}>
+                Add
+              </button>
+            </div>
+          </div>
+      )}
+
+      {/* grams  popup end */}
+      </div></p>;
     } else if (selectedCarb && selectedProtein) {
-      return <p>You selected: {selectedCarb} + {selectedProtein}</p>;
+      return <p>You selected: {selectedCarb} + {selectedProtein}
+      <div className="box w-auto m-auto mt-4 justify-between items-center">
+                  {/* <img src="assets/images/bowl.png" alt="not found" className='w-16 animate-slideInTop' /> */}
+                  <select className='text-black'  value={selectedOption} onChange={handleSelectChange}>
+                     {options.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                    <option value="add new">Add new</option>
+                  </select>
+
+                  {showPopup && (
+        <div
+          className="fixed top-0 left-24 w-full h-full bg-transparent bg-opacity-50 flex justify-center items-center"
+        >
+          <div className="bg-white p-4 rounded shadow-md w-96">
+          <div className="flex justify-between items-center mb-2">
+            <h2 className="text-lg font-bold  text-black">Add Grams</h2>
+            <button
+                className="px-2 py-2 text-red-500 text-md rounded mr-2"
+                onClick={closePopup}
+              >
+                <ImCross />
+              </button>
+              </div>
+            <input
+              type="text"
+              className="border p-2 w-full mb-4 text-black"
+              placeholder="Enter Gram"
+              value={newOption}
+              onChange={(e) => setNewOption(e.target.value)}
+            />
+            
+              <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={addNewOption}>
+                Add
+              </button>
+            </div>
+          </div>
+      )}
+
+      {/* grams  popup end */}
+      </div></p>;
     } else if (selectedParatha && selectedGreens) {
-      return <p>You selected: {selectedParatha} + {selectedGreens}</p>;
+      return <p>You selected: {selectedParatha} + {selectedGreens}
+      <div className="box w-auto m-auto mt-4 justify-between items-center">
+                  {/* <img src="assets/images/bowl.png" alt="not found" className='w-16 animate-slideInTop' /> */}
+                  <select className='text-black'  value={selectedOption} onChange={handleSelectChange}>
+                     {options.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                    <option value="add new">Add new</option>
+                  </select>
+
+                  {showPopup && (
+        <div
+          className="fixed top-0 left-24 w-full h-full bg-transparent bg-opacity-50 flex justify-center items-center"
+        >
+          <div className="bg-white p-4 rounded shadow-md w-96">
+          <div className="flex justify-between items-center mb-2">
+            <h2 className="text-lg font-bold  text-black">Add Grams</h2>
+            <button
+                className="px-2 py-2 text-red-500 text-md rounded mr-2"
+                onClick={closePopup}
+              >
+                <ImCross />
+              </button>
+              </div>
+            <input
+              type="text"
+              className="border p-2 w-full mb-4 text-black"
+              placeholder="Enter Gram"
+              value={newOption}
+              onChange={(e) => setNewOption(e.target.value)}
+            />
+            
+              <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={addNewOption}>
+                Add
+              </button>
+            </div>
+          </div>
+      )}
+
+      {/* grams  popup end */}
+      </div></p>;
     } else if (selectedCarb) {
       return <p>You selected: {selectedCarb}. <span style={{ color: 'red' }}>Please select a protein meal as well.</span></p>;
     } else if (selectedProtein) {
@@ -349,9 +475,12 @@ const cardRef = useRef(null);
 const [showPopup, setShowPopup] = useState(false); 
 
 const handleSelectChange = (e) => {
-  if (e.target.value === "add new") {
-    setShowPopup(true);
-  }
+    const value = e.target.value;
+  if (value === "add new") {
+      setShowPopup(true); // पॉपअप दिखाएं
+    } else {
+      setSelectedOption(value); // चयनित विकल्प अपडेट करें
+    }
 };
 
 
@@ -368,12 +497,18 @@ const closePopup = () => {
   const addNewOption = () => {
     if (newOption.trim() !== "") {
       const updatedOptions = [...options];
-      updatedOptions.splice(updatedOptions.indexOf("add new"), 0, newOption); // "Add new" से पहले जोड़ें
-      setOptions(updatedOptions); // विकल्प अपडेट करें
-      setSelectedOption(newOption); // नई वैल्यू को चयनित करें
+      // "Add new" से पहले नया ऑप्शन जोड़ें
+      const addNewIndex = updatedOptions.indexOf("add new");
+      updatedOptions.splice(addNewIndex, 0, newOption);
+  
+      setOptions(updatedOptions); // विकल्प सूची अपडेट करें
+      setSelectedOption(newOption); // नया ऑप्शन ऑटोमेटिक सेलेक्ट करें
       closePopup(); // पॉपअप बंद करें
+      setNewOption(""); // इनपुट फील्ड को साफ़ करें
     }
   };
+  
+  const[showDropdown, setShowDropdown] = useState(false);
 
 
 
@@ -423,8 +558,8 @@ const closePopup = () => {
               )}
           </div>
           
-          <div className="box flex w-40 m-auto mt-4 justify-between items-center">
-                  {/* <button className='bg-white text-black text-sm pl-2 pr-2'><FaPlus className='text-sm float-left mt-1 mr-1' /> Grams</button> */}
+          {/* <div className="box flex w-40 m-auto mt-4 justify-between items-center">
+                 
                   <img src="assets/images/bowl.png" alt="not found" className='w-16 animate-slideInTop' />
                   <select className='text-black'  value={selectedOption} onChange={handleSelectChange}>
                      {options.map((option, index) => (
@@ -464,8 +599,7 @@ const closePopup = () => {
           </div>
       )}
 
-      {/* grams  popup end */}
-          </div>
+          </div> */}
 
           {!showMealOptions && (
             <div className="search-box">
@@ -543,16 +677,46 @@ const closePopup = () => {
       <div className='meal-details flex-col p-2  animate-slideInTop'>
         <div className="flex justify-between">
         <div className="flex-col">
-        <select onChange={(e) => setSelectedMeal(e.target.value)}>
+        {/* <select onChange={(e) => setSelectedMeal(e.target.value)}>
   <option value="">Select a Meal</option>
   {mealOptions["One Pot Meal"].map((meal) => (
     <option key={meal} value={meal}>
       {meal}
     </option>
   ))}
-</select>
+</select> */}
+
+<div className="custom-dropdown">
+      {/* Button to trigger dropdown */}
+      <button
+        className="dropdown-btn"
+        onClick={() => setShowDropdown(!showDropdown)} // Toggle the dropdown visibility
+      >
+        {selectedMeal || "Select a Meal"} {/* Display selected meal or placeholder */}
+      </button>
+
+      {/* Show the dropdown when showDropdown is true */}
+      {showDropdown && (
+        <div className="dropdown-list">
+          {mealOptions["One Pot Meal"].map((meal) => (
+            <div
+              key={meal}
+              className="dropdown-item"
+              onClick={() => {
+                setSelectedMeal(meal);  // Set selected meal
+                setShowDropdown(false);  // Close the dropdown
+              }}
+            >
+              {meal}
+            </div>
+          ))}
+        </div>
+      )}
+        </div>
 
         </div>
+
+
         <div className="flex-p text-white">
         <p style={{ fontSize: '20px' }}>
           Meal:-<br />
@@ -596,31 +760,63 @@ const closePopup = () => {
       <div className="flex-col">
         <div className="carbs">
           <h2 className='text-lg pb-2 font-merinda text-white'>Carbs</h2>
-          <select
-            onChange={(e) => setSelectedCarb(e.target.value)}  // Set selectedCarb directly
-            value={selectedCarb}
-          >
-            <option value="">Select a Meal</option>
-            {mealOptions["Carbs"].map((meal) => (
-              <option key={meal} value={meal}>
-                {meal}
-              </option>
-            ))}
-          </select>
+          <div className="custom-dropdown">
+      {/* Button to trigger dropdown */}
+      <button
+        className="dropdown-btn"
+        onClick={() => setShowDropdown(!showDropdown)} // Toggle the dropdown visibility
+      >
+        {selectedMeal || "Select a Meal"} {/* Display selected meal or placeholder */}
+      </button>
+
+      {/* Show the dropdown when showDropdown is true */}
+      {showDropdown && (
+        <div className="dropdown-list">
+          {mealOptions["Carbs"].map((meal) => (
+            <div
+              key={meal}
+              className="dropdown-item"
+              onClick={() => {
+                setSelectedMeal(meal);  // Set selected meal
+                setShowDropdown(false);  // Close the dropdown
+              }}
+            >
+              {meal}
+            </div>
+          ))}
+        </div>
+      )}
+        </div>
         </div>
         <div className="protein">
           <h2 className='text-lg pb-2 font-merinda text-white'>Protein</h2>
-          <select
-            onChange={(e) => setSelectedProtein(e.target.value)}  // Set selectedProtein directly
-            value={selectedProtein}
-          >
-            <option value="">Select a Meal</option>
-            {mealOptions["Protein"].map((meal) => (
-              <option key={meal} value={meal}>
-                {meal}
-              </option>
-            ))}
-          </select>
+          <div className="custom-dropdown">
+      {/* Button to trigger dropdown */}
+      <button
+        className="dropdown-btn"
+        onClick={() => setShowDropdown(!showDropdown)} // Toggle the dropdown visibility
+      >
+        {selectedMeal || "Select a Meal"} {/* Display selected meal or placeholder */}
+      </button>
+
+      {/* Show the dropdown when showDropdown is true */}
+      {showDropdown && (
+        <div className="dropdown-list">
+          {mealOptions["Protein"].map((meal) => (
+            <div
+              key={meal}
+              className="dropdown-item"
+              onClick={() => {
+                setSelectedMeal(meal);  // Set selected meal
+                setShowDropdown(false);  // Close the dropdown
+              }}
+            >
+              {meal}
+            </div>
+          ))}
+        </div>
+      )}
+        </div>
         </div>
         </div>
         <div className="flex-p text-white">
@@ -661,29 +857,63 @@ const closePopup = () => {
       <div className="flex-col">
         <div className="Paratha">
           <h2 className='text-lg pb-2 font-merinda text-white'>Paratha</h2>
-          <select
-            onChange={(e) => handleSuggestionClick({ name: e.target.value, category: "Paratha" })}
-          >
-            <option value="">Select a Meal</option>
-            {mealOptions["Paratha"].map((meal) => (
-              <option key={meal} value={meal}>
-                {meal}
-              </option>
-            ))}
-          </select>
+          <div className="custom-dropdown">
+      {/* Button to trigger dropdown */}
+      <button
+        className="dropdown-btn"
+        onClick={() => setShowDropdown(!showDropdown)} // Toggle the dropdown visibility
+      >
+        {selectedMeal || "Select a Meal"} {/* Display selected meal or placeholder */}
+      </button>
+
+      {/* Show the dropdown when showDropdown is true */}
+      {showDropdown && (
+        <div className="dropdown-list">
+          {mealOptions["Paratha"].map((meal) => (
+            <div
+              key={meal}
+              className="dropdown-item"
+              onClick={() => {
+                setSelectedMeal(meal);  // Set selected meal
+                setShowDropdown(false);  // Close the dropdown
+              }}
+            >
+              {meal}
+            </div>
+          ))}
+        </div>
+      )}
+        </div>
         </div>
         <div className="Greens">
           <h2 className='text-lg pb-2 font-merinda text-white'>Greens</h2>
-          <select
-            onChange={(e) => handleSuggestionClick({ name: e.target.value, category: "Greens" })}
-          >
-            <option value="">Select a Meal</option>
-            {mealOptions["Greens"].map((meal) => (
-              <option key={meal} value={meal}>
-                {meal}
-              </option>
-            ))}
-          </select>
+          <div className="custom-dropdown">
+      {/* Button to trigger dropdown */}
+      <button
+        className="dropdown-btn"
+        onClick={() => setShowDropdown(!showDropdown)} // Toggle the dropdown visibility
+      >
+        {selectedMeal || "Select a Meal"} {/* Display selected meal or placeholder */}
+      </button>
+
+      {/* Show the dropdown when showDropdown is true */}
+      {showDropdown && (
+        <div className="dropdown-list">
+          {mealOptions["Greens"].map((meal) => (
+            <div
+              key={meal}
+              className="dropdown-item"
+              onClick={() => {
+                setSelectedMeal(meal);  // Set selected meal
+                setShowDropdown(false);  // Close the dropdown
+              }}
+            >
+              {meal}
+            </div>
+          ))}
+        </div>
+      )}
+        </div>
         </div>
         </div>
         <div className="flex-p text-white">

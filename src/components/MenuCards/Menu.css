@@ -207,6 +207,7 @@ box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 .detail-flex p {
   font-size: 12px;
+  width: 120px;
 }
 .app {
   font-family: Arial, sans-serif;
@@ -335,7 +336,7 @@ box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   color: #000;
 }
 
-.active {
+.tabs h4.active {
   background-color: #047592;
   color: #fff;
   padding: 2px 8px;
@@ -484,4 +485,106 @@ transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 .breakf h1 {
 color: #fff;
 font-size: 24px;
+}
+
+
+/* navbar */
+.navbar {
+  background-color: #093414;
+  height: fit-content;
+  color: #fff;
+  width: 100%;
+}
+.navbar ul {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  border: 2px solid white;
+  width: 500px;
+  justify-content: center;
+  margin: auto;
+}
+.navbar ul li {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+}
+
+.dropdown-container {
+  position: relative;
+  width: 250px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* The button that shows selected meal or placeholder text */
+.dropdown-btn {
+  background: #37864bf5; /* Blue background */
+  color: white;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 500;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  width: fit-content;
+  text-align: left;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dropdown-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adding shadow for depth */
+}
+
+/* Dropdown list container */
+.dropdown-list {
+  position: absolute;
+  top: 35%;
+  left: 30px;
+  width: 200px;
+  padding:  0 8px;
+  background-color: #ddd;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  margin-top: 0px;
+  max-height: 300px;  /* Limit height to prevent overflow */
+  overflow-y: auto;
+  scrollbar-width: none;
+  animation: slideDown 0.3s ease-out; /* Smooth slide-down animation */
+}
+
+/* Dropdown item styling */
+.dropdown-item {
+  padding: 8px;
+  font-size: 16px;
+  color: #093414;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-bottom: 2px solid #093414;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #ddd; /* Light background on hover */
+  transform: scale(1); /* Slide effect to the right on hover */
+}
+
+/* Remove border from the last item */
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+/* Slide down animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
