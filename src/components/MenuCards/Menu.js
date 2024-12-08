@@ -6,12 +6,16 @@ import EveningSnacks from "./EveningSnacks";
 import Dinner from "./Dinner";
 import './Menu.css';
 import './Rough.css';
+import { FaLock } from "react-icons/fa";
 
 const Menu = () => {
   const [activeSection, setActiveSection] = useState(null); // Tracks active section
   const observer = useRef(null); // Reference for IntersectionObserver
   const debounceTimeout = useRef(null); // For debouncing scroll events
   const [activeIndex, setActiveIndex] = useState(0); // State to track active link index
+
+  const [unlockedDays, setUnlockedDays] = useState([0]); // Start with Day 1 unlocked
+  const [activeDay, setActiveDay] = useState(0); // Track the active day
 
   const sections = [
     { id: "Breakfast", Component: <Breakfast />, icon: "assets/images/churros.mp4" },
@@ -56,6 +60,23 @@ const Menu = () => {
       behavior: "smooth",
     });
   };
+  
+   const days = Array.from({ length: 31 }, (_, index) => `Day ${index + 1}`);
+
+  // Handle day click
+  const handleDayClick = (index) => {
+    if (unlockedDays.includes(index)) {
+      setActiveDay(index); // Set the clicked day as active
+    }
+  };
+
+  // Unlock the next day when the active day finishes
+  const unlockNextDay = () => {
+    if (!unlockedDays.includes(activeDay + 1) && activeDay + 1 < days.length) {
+      setUnlockedDays((prev) => [...prev, activeDay + 1]);
+    }
+  };
+
 
   return (
     <div  style={{
@@ -104,12 +125,44 @@ const Menu = () => {
         </div>
      </div>  
 
+            {/* calendar */}
+            <div className="days">
+  <div className="days-container">
+    {days.map((day, index) => (
+      <div
+        key={index}
+        className={`day-btn ${
+          activeDay === index
+            ? "active"
+            : unlockedDays.includes(index)
+            ? ""
+            : "locked"
+        }`}
+        onClick={() => handleDayClick(index)}
+      >
+        {/* Front side content */}
+        <div className="front">
+          <h4>{day}</h4>
+          {!unlockedDays.includes(index) && (
+            <span className="icon-lock"><FaLock /></span> // Render icon for unlocked days
+          )}
+        </div>
+        {/* Back side content */}
+        <div className="back">
+          <h4>Day {index + 1} Info</h4>
+        </div>
+      </div>
+    ))}
+  </div>
+            </div>
+
+
 
       {/* Sections */}
       <div
       className="res-break"
         style={{
-          marginTop: "100px",
+          marginTop: "180px",
           padding: "20px",
           backgroundColor: "#f0f0f5",
           scrollBehavior: "smooth",
@@ -118,6 +171,13 @@ const Menu = () => {
           alignItems: "center",
         }}
       >
+
+       <div className="day-meal">
+            <h1>{days[activeDay]}</h1>
+            <button onClick={unlockNextDay}>
+              Next Day
+            </button>
+          </div>
 
         {sections.map((section) => (
           <div

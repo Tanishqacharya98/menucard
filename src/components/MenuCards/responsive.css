@@ -75,6 +75,16 @@
     .list a {
         font-size: 14px;
     }
+    .days {
+        margin-top: 120px;
+        width: 100%;
+    }
+    .days-container {
+        margin-left: 6%;
+    }
+    .day-meal {
+        margin-top: 40px;
+    }
 }
 
 @media (max-width: 425px) {

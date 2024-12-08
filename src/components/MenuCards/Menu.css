@@ -142,7 +142,7 @@ box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   color: #fff;
   margin: auto;
   margin-top: 10px;
-  position: relative;
+  /* position: relative; */
 }
 .detail-flex h3 {
   font-size: 16px;
@@ -539,7 +539,7 @@ font-size: 24px;
 /* Dropdown list container */
 .dropdown-list {
   position: absolute;
-  top: 35%;
+  top: 38%;
   left: 30px;
   width: 200px;
   padding:  0 8px;
@@ -552,6 +552,9 @@ font-size: 24px;
   overflow-y: auto;
   scrollbar-width: none;
   animation: slideDown 0.3s ease-out; /* Smooth slide-down animation */
+}
+.greens-dropdown {
+  margin-top: 16%;
 }
 
 /* Dropdown item styling */
@@ -587,4 +590,111 @@ font-size: 24px;
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+
+/* days */
+.days {
+    height: 100px;
+    width: 100%;
+    background-color: #f0f0f5;
+    position: fixed;
+    z-index: 100;
+    margin-top: 7%;
+}
+
+.days-container {
+    position: fixed;
+    width: 380px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 20px;
+    margin-left: 36.5%;
+    z-index: 100;
+    overflow-x: auto;
+    gap: 10px;
+    scrollbar-width: none;
+}
+
+.days-container .day-btn {
+  flex: 0 0 auto; /* Ensures buttons do not shrink or grow */
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #2196f3, #1ee994);
+  align-items: center;
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  outline: none;
+  border: 4px solid #fff;
+  box-shadow: inset 2px 2px 0px #2196f3,
+              inset -2px -2px 0px #1ee994;
+              transition: transform 0.6s;
+              transform-style: preserve-3d;
+}
+
+
+
+.day-btn:hover {
+  transform: rotateY(180deg); /* Rotate the element on hover */
+}
+
+.day-btn h4 {
+  backface-visibility: hidden; /* Ensure the text flips correctly */
+}
+.day-btn.locked h4 {
+  opacity: 0.3;
+}
+.icon-lock {
+  margin-top: -20px;
+}
+.day-btn .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #40c9ff, #e81cff);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  transform: rotateY(180deg); /* Flip the back content initially */
+}
+
+.day-btn.locked {
+  background: #ccc;
+  color: #000;
+  cursor: not-allowed; 
+  pointer-events: none;
+}
+
+.day-btn.active {
+  background: linear-gradient(45deg, #2196f3, #1ee994);
+  color: #fff;
+  border: 4px solid #fff;
+  cursor: pointer;
+}
+.day-meal h1 {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: sans-serif;
+  margin-top: 2px;
+}
+.day-meal button {
+  background-color: #1ee994;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: sans;
+}
+.day-meal button:hover {
+  transform: scale(1.1);
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { ImCross } from 'react-icons/im';
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
+import { useNavigate } from 'react-router-dom';
 // import './parent.css'
 
 const Breakfast = () => {
@@ -17,13 +18,15 @@ const Breakfast = () => {
   const [showMealOptions, setShowMealOptions] = useState(false);
   const [selectedDayMeal, setSelectedDayMeal] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  // const [selectedCategory, setSelectedCategory] = useState(null);
 
   const [searchQueryOnePot, setSearchQueryOnePot] = useState('');
 const [suggestionsOnePot, setSuggestionsOnePot] = useState([]);
 
 const [searchQuerySeparate, setSearchQuerySeparate] = useState('');
 const [suggestionsSeparate, setSuggestionsSeparate] = useState([]);
+const [selectedSeparateMeal, setSelectedSeparateMeal] = useState('');
+const [selectedMeals, setSelectedMeals] = useState('Separate Meal'); // Tracks current tab
 
 const [searchQueryParatha, setSearchQueryParatha] = useState('');
 const [suggestionsParatha, setSuggestionsParatha] = useState([]);
@@ -42,6 +45,8 @@ const [activeMeal, setActiveMeal] = useState(''); // Active meal track karne ke 
     "Paratha": ["Paneer Paratha", "Plain Paratha", "Mix Paratha"],
     "Greens": ["Palak", "Methi", "Bhindi"]
   };
+
+  const navigate = useNavigate();
 
   // Handle search and suggestion filtering
   const handleSearchChange = (e) => {
@@ -173,168 +178,84 @@ const [activeMeal, setActiveMeal] = useState(''); // Active meal track karne ke 
     if (selectedParatha && selectedGreens) {
       return <p>You selected: {selectedParatha} + {selectedGreens}</p>;
     } else if (selectedParatha) {
-      return <p>You selected: {selectedParatha}. <span style={{ color: 'red' }}>Please select a greens option as well.</span></p>;
+      return <p>You selected: {selectedParatha}.{' '} <span style={{ color: 'red' }}>Please select a greens option as well.</span></p>;
     } else if (selectedGreens) {
-      return <p>You selected: {selectedGreens}. <span style={{ color: 'red' }}>Please select a paratha option as well.</span></p>;
+      return <p>You selected: {selectedGreens}.{' '} <span style={{ color: 'red' }}>Please select a paratha option as well.</span></p>;
     } else {
       return <p>Please select a meal</p>;
     }
   }
 
+// Render selected meals
+const renderSelectedMeals = () => {
+  // Agar One-Pot Meal select hai
+  if (selectedMeal === 'One-Pot Meal') {
+    // Jab One-Pot Meal select ho, toh baaki saare selected items clear kar do
+    return <p>You selected: {selectedMeal}</p>;
+  }
 
-  // Render selected meals
-  const renderSelectedMeals = () => {
-    if (selectedMeal) {
-      return <p>You selected: {selectedMeal}
-      <div className="box w-auto m-auto mt-4 justify-between items-center">
-                  {/* <img src="assets/images/bowl.png" alt="not found" className='w-16 animate-slideInTop' /> */}
-                  <select className='text-black'  value={selectedOption} onChange={handleSelectChange}>
-                     {options.map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                    <option value="add new">Add new</option>
-                  </select>
+  // Agar Separate Meal (Carb + Protein) select hai
+  if (selectedCarb && selectedProtein) {
+    return <p>You selected: {selectedCarb} + {selectedProtein}</p>;
+    setSelectedMeals(true); // Switch to meal tab
 
-                  {showPopup && (
-        <div
-          className="fixed top-0 left-24 w-full h-full bg-transparent bg-opacity-50 flex justify-center items-center"
-        >
-          <div className="bg-white p-4 rounded shadow-md w-96">
-          <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-bold  text-black">Add Grams</h2>
-            <button
-                className="px-2 py-2 text-red-500 text-md rounded mr-2"
-                onClick={closePopup}
-              >
-                <ImCross />
-              </button>
-              </div>
-            <input
-              type="text"
-              className="border p-2 w-full mb-4 text-black"
-              placeholder="Enter Gram"
-              value={newOption}
-              onChange={(e) => setNewOption(e.target.value)}
-            />
-            
-              <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={addNewOption}>
-                Add
-              </button>
-            </div>
-          </div>
-      )}
+  }
 
-      {/* grams  popup end */}
-      </div></p>;
-    } else if (selectedCarb && selectedProtein) {
-      return <p>You selected: {selectedCarb} + {selectedProtein}
-      <div className="box w-auto m-auto mt-4 justify-between items-center">
-                  {/* <img src="assets/images/bowl.png" alt="not found" className='w-16 animate-slideInTop' /> */}
-                  <select className='text-black'  value={selectedOption} onChange={handleSelectChange}>
-                     {options.map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                    <option value="add new">Add new</option>
-                  </select>
+  // Agar sirf ek hi meal select hai (Carb ya Protein)
+  if (selectedCarb || selectedProtein) {
+    return (
+      <p>
+        {selectedCarb ? `Carb: ${selectedCarb}` : <span style={{ color: 'red' }}>Select a Carb</span>} +
+        {selectedProtein ? ` Protein: ${selectedProtein}` : <span style={{ color: 'red' }}>Select a Protein</span>}
+      </p>
+    );
+  }
 
-                  {showPopup && (
-        <div
-          className="fixed top-0 left-24 w-full h-full bg-transparent bg-opacity-50 flex justify-center items-center"
-        >
-          <div className="bg-white p-4 rounded shadow-md w-96">
-          <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-bold  text-black">Add Grams</h2>
-            <button
-                className="px-2 py-2 text-red-500 text-md rounded mr-2"
-                onClick={closePopup}
-              >
-                <ImCross />
-              </button>
-              </div>
-            <input
-              type="text"
-              className="border p-2 w-full mb-4 text-black"
-              placeholder="Enter Gram"
-              value={newOption}
-              onChange={(e) => setNewOption(e.target.value)}
-            />
-            
-              <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={addNewOption}>
-                Add
-              </button>
-            </div>
-          </div>
-      )}
+  // Agar Paratha aur Greens select hain
+  if (selectedParatha && selectedGreens) {
+    return <p>You selected: {selectedParatha} + {selectedGreens}</p>;
+  }
 
-      {/* grams  popup end */}
-      </div></p>;
-    } else if (selectedParatha && selectedGreens) {
-      return <p>You selected: {selectedParatha} + {selectedGreens}
-      <div className="box w-auto m-auto mt-4 justify-between items-center">
-                  {/* <img src="assets/images/bowl.png" alt="not found" className='w-16 animate-slideInTop' /> */}
-                  <select className='text-black'  value={selectedOption} onChange={handleSelectChange}>
-                     {options.map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                    <option value="add new">Add new</option>
-                  </select>
+  // Agar sirf ek Paratha ya Greens selected hai
+  if (selectedParatha || selectedGreens) {
+    return (
+      <p>
+        {selectedParatha ? `Paratha: ${selectedParatha}` : <span style={{ color: 'red' }}>Select a Paratha</span>} +
+        {selectedGreens ? ` Greens: ${selectedGreens}` : <span style={{ color: 'red' }}>Select Greens</span>}
+      </p>
+    );
+  }
 
-                  {showPopup && (
-        <div
-          className="fixed top-0 left-24 w-full h-full bg-transparent bg-opacity-50 flex justify-center items-center"
-        >
-          <div className="bg-white p-4 rounded shadow-md w-96">
-          <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-bold  text-black">Add Grams</h2>
-            <button
-                className="px-2 py-2 text-red-500 text-md rounded mr-2"
-                onClick={closePopup}
-              >
-                <ImCross />
-              </button>
-              </div>
-            <input
-              type="text"
-              className="border p-2 w-full mb-4 text-black"
-              placeholder="Enter Gram"
-              value={newOption}
-              onChange={(e) => setNewOption(e.target.value)}
-            />
-            
-              <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={addNewOption}>
-                Add
-              </button>
-            </div>
-          </div>
-      )}
+  // Agar general meal selected hai (except Separate Meal)
+  if (selectedMeal && selectedMeal !== 'Separate Meal') {
+    return <p>selected: {selectedMeal}</p>;
+  }
 
-      {/* grams  popup end */}
-      </div></p>;
-    } else if (selectedCarb) {
-      return <p>You selected: {selectedCarb}. <span style={{ color: 'red' }}>Please select a protein meal as well.</span></p>;
-    } else if (selectedProtein) {
-      return <p>You selected: {selectedProtein}. <span style={{ color: 'red' }}>Please select a carb meal as well.</span></p>;
-    } else if (selectedParatha) {
-      return <p>You selected: {selectedParatha}. <span style={{ color: 'red' }}>Please select a greens option as well.</span></p>;
-    } else if (selectedGreens) {
-      return <p>You selected: {selectedGreens}. <span style={{ color: 'red' }}>Please select a paratha option as well.</span></p>;
-    } else {
-      return <p>Please select a meal</p>;
-    }
-  };
+  // Default: Agar koi bhi meal select nahi kiya gaya
+  return <p>Please select a meal</p>;
+};
   
+
+const handleCarbChange = (e) => {
+  setSelectedCarb(e.target.value);
+};
+
+const handleProteinChange = (e) => {
+  setSelectedProtein(e.target.value);
+};
+
+// UseEffect hook to switch tab when both Carb and Protein are selected
+useEffect(() => {
+  if (selectedCarb && selectedProtein) {
+    setSelectedMeals('mealDetails'); // Switch to meal details
+  }
+}, [selectedCarb, selectedProtein]);
+
 
 
 
   // Handle when a suggestion is clicked
   const handleOnePotMealClick = (suggest) => {
-    // Clear previously selected options
     if (suggest.category === "One Pot Meal") {
       setSelectedMeal(suggest.name);
       setSelectedCarb('');
@@ -343,12 +264,10 @@ const [activeMeal, setActiveMeal] = useState(''); // Active meal track karne ke 
       setSelectedGreens('');
     }
   
-    // Clear the suggestions and search input
     setSuggestions([]);
     setSearchQuery('');
     setSelectedDay(null);
   
-    // Blur the input to remove focus and hide suggestions
     document.getElementById('searchInput').blur();
   };
   
@@ -409,6 +328,36 @@ const [activeMeal, setActiveMeal] = useState(''); // Active meal track karne ke 
   setSuggestionsSeparate(newSuggestions);
 };
 
+
+
+const handleSeparateSuggestClick = (suggestion) => {
+  if (suggestion.category === "Carbs") {
+    setSelectedCarb(suggestion.name);
+  } else if (suggestion.category === "Protein") {
+    setSelectedProtein(suggestion.name);
+  }
+
+  // Clear search and suggestions
+  setSearchQuerySeparate('');
+  setSuggestionsSeparate([]);
+};
+
+
+// Combine selected items into a single meal
+useEffect(() => {
+  if (selectedCarb && selectedProtein) {
+    setSelectedSeparateMeal(`${selectedCarb} + ${selectedProtein}`);
+  } else if (selectedCarb) {
+    setSelectedSeparateMeal(selectedCarb);
+  } else if (selectedProtein) {
+    setSelectedSeparateMeal(selectedProtein);
+  } else {
+    setSelectedSeparateMeal('');
+  }
+}, [selectedCarb, selectedProtein]);
+
+
+
 // Handle search and suggestion filtering for One Pot Meal
 const handleSearchOnePotChange = (e) => {
   const query = e.target.value.toLowerCase();
@@ -422,6 +371,13 @@ const handleSearchOnePotChange = (e) => {
   } else {
     setSuggestionsOnePot([]);
   }
+};
+
+// When a suggestion is clicked
+const handleOnePotSuggestClick = (suggestion) => {
+  setSelectedMeal(suggestion.name); // Set the selected meal
+  setSearchQueryOnePot(''); // Clear the search input
+  setSuggestionsOnePot([]); // Clear the suggestions list
 };
 
 
@@ -447,6 +403,32 @@ const handleSearchParathaChange = (e) => {
 
   setSuggestionsParatha(newSuggestions);
 };
+
+
+const handleParathaSuggestClick = (suggestion) => {
+  if (suggestion.category === "Paratha") {
+    setSelectedParatha(suggestion.name);
+  } else if (suggestion.category === "Greens") {
+    setSelectedGreens(suggestion.name);
+  }
+
+  // Clear search and suggestions
+  setSearchQueryParatha('');
+  setSuggestionsParatha([]);
+};
+
+// Render selected meal combination
+useEffect(() => {
+  if (selectedParatha && selectedGreens) {
+    setSelectedMeal(`${selectedParatha} + ${selectedGreens}`);
+  } else if (selectedParatha) {
+    setSelectedMeal(selectedParatha);
+  } else if (selectedGreens) {
+    setSelectedMeal(selectedGreens);
+  } else {
+    setSelectedMeal('');
+  }
+}, [selectedParatha, selectedGreens]);
 
 
 
@@ -510,7 +492,13 @@ const closePopup = () => {
   
   const[showDropdown, setShowDropdown] = useState(false);
 
+  const [showCarbsDropdown, setShowCarbsDropdown] = useState(false);
+  const [showProteinDropdown, setShowProteinDropdown] = useState(false);
 
+  
+  const [showParathaDropdown, setShowParathaDropdown] = useState(false);
+  const [showGreensDropdown, setShowGreensDropdown] = useState(false);
+  
 
 
 // useEffect(() => {
@@ -677,42 +665,31 @@ const closePopup = () => {
       <div className='meal-details flex-col p-2  animate-slideInTop'>
         <div className="flex justify-between">
         <div className="flex-col">
-        {/* <select onChange={(e) => setSelectedMeal(e.target.value)}>
-  <option value="">Select a Meal</option>
-  {mealOptions["One Pot Meal"].map((meal) => (
-    <option key={meal} value={meal}>
-      {meal}
-    </option>
-  ))}
-</select> */}
-
-<div className="custom-dropdown">
-      {/* Button to trigger dropdown */}
-      <button
-        className="dropdown-btn"
-        onClick={() => setShowDropdown(!showDropdown)} // Toggle the dropdown visibility
-      >
-        {selectedMeal || "Select a Meal"} {/* Display selected meal or placeholder */}
-      </button>
-
-      {/* Show the dropdown when showDropdown is true */}
-      {showDropdown && (
-        <div className="dropdown-list">
-          {mealOptions["One Pot Meal"].map((meal) => (
-            <div
-              key={meal}
-              className="dropdown-item"
-              onClick={() => {
-                setSelectedMeal(meal);  // Set selected meal
-                setShowDropdown(false);  // Close the dropdown
-              }}
-            >
-              {meal}
-            </div>
-          ))}
+        <div className="onepotmeal">
+  {/* <h2 className="text-lg pb-2 font-merinda text-white">One Pot Meal</h2> */}
+  <button
+    className="dropdown-btn"
+    onClick={() => setShowDropdown(!showDropdown)}
+  >
+    {selectedMeal || "Select a Meal"}
+  </button>
+  {showDropdown && (
+    <div className="dropdown-list">
+      {mealOptions["One Pot Meal"].map((meal) => (
+        <div
+          key={meal}
+          className="dropdown-item"
+          onClick={() => {
+            setSelectedMeal(meal);
+            setShowDropdown(false);
+          }}
+        >
+          {meal}
         </div>
-      )}
-        </div>
+      ))}
+    </div>
+  )}
+</div>
 
         </div>
 
@@ -731,7 +708,7 @@ const closePopup = () => {
           
         <input
           type="text"
-          value={searchQuery}
+          value={searchQueryOnePot}
           onChange={handleSearchOnePotChange}
           placeholder="Search meal..."
           className="search-input"
@@ -742,7 +719,7 @@ const closePopup = () => {
               <div
                 key={index}
                 className="suggestion-item"
-                onClick={() => handleOnePotMealClick(suggestion)}
+                onClick={() => handleOnePotSuggestClick(suggestion)}
               >
                 {suggestion.name} ({suggestion.category})
               </div>
@@ -758,66 +735,58 @@ const closePopup = () => {
       <div className='meal-details flex-col p-2  animate-slideInTop'>
       <div className="flex justify-between">
       <div className="flex-col">
-        <div className="carbs">
-          <h2 className='text-lg pb-2 font-merinda text-white'>Carbs</h2>
-          <div className="custom-dropdown">
-      {/* Button to trigger dropdown */}
-      <button
-        className="dropdown-btn"
-        onClick={() => setShowDropdown(!showDropdown)} // Toggle the dropdown visibility
-      >
-        {selectedMeal || "Select a Meal"} {/* Display selected meal or placeholder */}
-      </button>
+      <div className="carbs">
+  <h2 className="text-lg pb-2 font-merinda text-white">Carbs</h2>
+  <button
+    className="dropdown-btn"
+    onClick={() => setShowCarbsDropdown(!showCarbsDropdown)}
+  >
+    {selectedCarb || "Select a Carbs"}
+  </button>
+  {showCarbsDropdown && (
+    <div className="dropdown-list">
+      {mealOptions["Carbs"].map((meal) => (
+        <div
+          key={meal}
+          className="dropdown-item"
+          onClick={() => {
+            setSelectedCarb(meal);
+            setShowCarbsDropdown(false);
+          }}
+        >
+          {meal}
+        </div>
+      ))}
+    </div>
+  )}
+      </div>
 
-      {/* Show the dropdown when showDropdown is true */}
-      {showDropdown && (
-        <div className="dropdown-list">
-          {mealOptions["Carbs"].map((meal) => (
-            <div
-              key={meal}
-              className="dropdown-item"
-              onClick={() => {
-                setSelectedMeal(meal);  // Set selected meal
-                setShowDropdown(false);  // Close the dropdown
-              }}
-            >
-              {meal}
-            </div>
-          ))}
+<div className="protein">
+  <h2 className="text-lg pb-2 font-merinda text-white">Protein</h2>
+  <button
+    className="dropdown-btn"
+    onClick={() => setShowProteinDropdown(!showProteinDropdown)}
+  >
+    {selectedProtein || "Select a Protein"}
+  </button>
+  {showProteinDropdown && (
+    <div className="dropdown-list greens-dropdown">
+      {mealOptions["Protein"].map((meal) => (
+        <div
+          key={meal}
+          className="dropdown-item"
+          onClick={() => {
+            setSelectedProtein(meal);
+            setShowProteinDropdown(false);
+          }}
+        >
+          {meal}
         </div>
-      )}
-        </div>
-        </div>
-        <div className="protein">
-          <h2 className='text-lg pb-2 font-merinda text-white'>Protein</h2>
-          <div className="custom-dropdown">
-      {/* Button to trigger dropdown */}
-      <button
-        className="dropdown-btn"
-        onClick={() => setShowDropdown(!showDropdown)} // Toggle the dropdown visibility
-      >
-        {selectedMeal || "Select a Meal"} {/* Display selected meal or placeholder */}
-      </button>
+      ))}
+    </div>
+  )}
+</div>
 
-      {/* Show the dropdown when showDropdown is true */}
-      {showDropdown && (
-        <div className="dropdown-list">
-          {mealOptions["Protein"].map((meal) => (
-            <div
-              key={meal}
-              className="dropdown-item"
-              onClick={() => {
-                setSelectedMeal(meal);  // Set selected meal
-                setShowDropdown(false);  // Close the dropdown
-              }}
-            >
-              {meal}
-            </div>
-          ))}
-        </div>
-      )}
-        </div>
-        </div>
         </div>
         <div className="flex-p text-white">
         <p style={{ fontSize: '20px' }}>
@@ -829,7 +798,7 @@ const closePopup = () => {
       <div className="search w-[300px]h-40">
         <input
             type="text"
-            value={searchQuery}
+            value={searchQuerySeparate}
             onChange={handleSearchSeprateChange}
             placeholder="Search meal..."
             className="search-input"
@@ -840,7 +809,7 @@ const closePopup = () => {
                 <div
                   key={index}
                   className="suggestion-item"
-                  onClick={() => handleParathaClick(suggestion)}
+                  onClick={() => handleSeparateSuggestClick(suggestion)}
                 >
                   {suggestion.name} ({suggestion.category})
                 </div>
@@ -855,66 +824,57 @@ const closePopup = () => {
       <div className='meal-details flex-col p-2  animate-slideInTop '>
       <div className="flex justify-between">
       <div className="flex-col">
-        <div className="Paratha">
-          <h2 className='text-lg pb-2 font-merinda text-white'>Paratha</h2>
-          <div className="custom-dropdown">
-      {/* Button to trigger dropdown */}
-      <button
-        className="dropdown-btn"
-        onClick={() => setShowDropdown(!showDropdown)} // Toggle the dropdown visibility
-      >
-        {selectedMeal || "Select a Meal"} {/* Display selected meal or placeholder */}
-      </button>
+      <div className="paratha">
+  <h2 className="text-lg pb-2 font-merinda text-white">Paratha</h2>
+  <button
+    className="dropdown-btn"
+    onClick={() => setShowParathaDropdown(!showParathaDropdown)}
+  >
+    {selectedParatha || "Select a paratha"}
+  </button>
+  {showParathaDropdown && (
+    <div className="dropdown-list">
+      {mealOptions["Paratha"].map((meal) => (
+        <div
+          key={meal}
+          className="dropdown-item"
+          onClick={() => {
+            setSelectedParatha(meal);
+            setShowParathaDropdown(false);
+          }}
+        >
+          {meal}
+        </div>
+      ))}
+    </div>
+  )}
+      </div>
 
-      {/* Show the dropdown when showDropdown is true */}
-      {showDropdown && (
-        <div className="dropdown-list">
-          {mealOptions["Paratha"].map((meal) => (
-            <div
-              key={meal}
-              className="dropdown-item"
-              onClick={() => {
-                setSelectedMeal(meal);  // Set selected meal
-                setShowDropdown(false);  // Close the dropdown
-              }}
-            >
-              {meal}
-            </div>
-          ))}
+<div className="greens">
+  <h2 className="text-lg pb-2 font-merinda text-white">Greens</h2>
+  <button
+    className="dropdown-btn"
+    onClick={() => setShowGreensDropdown(!showGreensDropdown)}
+  >
+    {selectedGreens || "Select a Greens"}
+  </button>
+  {showGreensDropdown && (
+    <div className="dropdown-list greens-dropdown">
+      {mealOptions["Greens"].map((meal) => (
+        <div
+          key={meal}
+          className="dropdown-item"
+          onClick={() => {
+            setSelectedGreens(meal);
+            setShowGreensDropdown(false);
+          }}
+        >
+          {meal}
         </div>
-      )}
-        </div>
-        </div>
-        <div className="Greens">
-          <h2 className='text-lg pb-2 font-merinda text-white'>Greens</h2>
-          <div className="custom-dropdown">
-      {/* Button to trigger dropdown */}
-      <button
-        className="dropdown-btn"
-        onClick={() => setShowDropdown(!showDropdown)} // Toggle the dropdown visibility
-      >
-        {selectedMeal || "Select a Meal"} {/* Display selected meal or placeholder */}
-      </button>
-
-      {/* Show the dropdown when showDropdown is true */}
-      {showDropdown && (
-        <div className="dropdown-list">
-          {mealOptions["Greens"].map((meal) => (
-            <div
-              key={meal}
-              className="dropdown-item"
-              onClick={() => {
-                setSelectedMeal(meal);  // Set selected meal
-                setShowDropdown(false);  // Close the dropdown
-              }}
-            >
-              {meal}
-            </div>
-          ))}
-        </div>
-      )}
-        </div>
-        </div>
+      ))}
+    </div>
+  )}
+</div>
         </div>
         <div className="flex-p text-white">
         <p style={{ fontSize: '16px' }}>
@@ -926,7 +886,7 @@ const closePopup = () => {
         <div className="search w-[300px]h-40">
         <input
             type="text"
-            value={searchQuery}
+            value={searchQueryParatha}
             onChange={handleSearchParathaChange}
             placeholder="Search meal..."
             className="search-input"
@@ -937,7 +897,7 @@ const closePopup = () => {
                 <div
                   key={index}
                   className="suggestion-item"
-                  onClick={() => handleParathaClick(suggestion)}
+                  onClick={() => handleParathaSuggestClick(suggestion)}
                 >
                   {suggestion.name} ({suggestion.category})
                 </div>
