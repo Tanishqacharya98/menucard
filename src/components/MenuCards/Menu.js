@@ -7,6 +7,7 @@ import Dinner from "./Dinner";
 import './Menu.css';
 import './Rough.css';
 import { FaLock } from "react-icons/fa";
+import FooterHeader from "../FooterHeader";
 
 const Menu = () => {
   const [activeSection, setActiveSection] = useState(null); // Tracks active section
@@ -15,7 +16,8 @@ const Menu = () => {
   const [activeIndex, setActiveIndex] = useState(0); // State to track active link index
 
   const [unlockedDays, setUnlockedDays] = useState([0]); // Start with Day 1 unlocked
-  const [activeDay, setActiveDay] = useState(0); // Track the active day
+  const [activeDay, setActiveDay] = useState(null); // Track the active day
+  const [dayUnlocked, setDayUnlocked] = useState([...unlockedDays]);
 
   const sections = [
     { id: "Breakfast", Component: <Breakfast />, icon: "assets/images/churros.mp4" },
@@ -63,17 +65,22 @@ const Menu = () => {
   
    const days = Array.from({ length: 31 }, (_, index) => `Day ${index + 1}`);
 
-  // Handle day click
-  const handleDayClick = (index) => {
-    if (unlockedDays.includes(index)) {
-      setActiveDay(index); // Set the clicked day as active
+   const handleDayClick = (index) => {
+    if (dayUnlocked.includes(index)) {
+      setActiveDay(index); // Sirf unlocked din ko active karenge
     }
   };
 
-  // Unlock the next day when the active day finishes
   const unlockNextDay = () => {
-    if (!unlockedDays.includes(activeDay + 1) && activeDay + 1 < days.length) {
-      setUnlockedDays((prev) => [...prev, activeDay + 1]);
+    if (activeDay !== null && activeDay + 1 < days.length) {
+      setDayUnlocked((prev) => [...prev, activeDay + 1]); // Next din unlock karein
+      setActiveDay(activeDay + 1); // Next day ko active karein
+    }
+  };
+
+  const handleNextDay = () => {
+    if (activeDay !== null && unlockedDays.includes(activeDay + 1)) {
+      setActiveDay(activeDay + 1); // Next unlocked din par move karenge
     }
   };
 
@@ -125,37 +132,31 @@ const Menu = () => {
         </div>
      </div>  
 
-            {/* calendar */}
             <div className="days">
-  <div className="days-container">
-    {days.map((day, index) => (
-      <div
-        key={index}
-        className={`day-btn ${
-          activeDay === index
-            ? "active"
-            : unlockedDays.includes(index)
-            ? ""
-            : "locked"
-        }`}
-        onClick={() => handleDayClick(index)}
-      >
-        {/* Front side content */}
-        <div className="front">
-          <h4>{day}</h4>
-          {!unlockedDays.includes(index) && (
-            <span className="icon-lock"><FaLock /></span> // Render icon for unlocked days
-          )}
-        </div>
-        {/* Back side content */}
-        <div className="back">
-          <h4>Day {index + 1} Info</h4>
+        <div className="days-container">
+          {days.map((day, index) => (
+            <div
+              key={index}
+              className={`day-btn ${
+                activeDay === index
+                  ? "active"
+                  : dayUnlocked.includes(index)
+                  ? ""
+                  : "locked"
+              }`}
+              onClick={() => handleDayClick(index)}
+            >
+              {/* Front side content */}
+              <div className="front">
+                <h4>{day}</h4>
+                {!dayUnlocked.includes(index) && <span>🔒</span>}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    ))}
-  </div>
-            </div>
 
+     
 
 
       {/* Sections */}
@@ -172,12 +173,30 @@ const Menu = () => {
         }}
       >
 
-       <div className="day-meal">
-            <h1>{days[activeDay]}</h1>
-            <button onClick={unlockNextDay}>
-              Next Day
-            </button>
-          </div>
+ {/* Day Details Section */}
+ {activeDay !== null && (
+        <div className="day-meal">
+          <h1>{days[activeDay]}</h1>
+          {dayUnlocked.includes(activeDay + 1) ? (
+            <button onClick={unlockNextDay}>Next Day</button>
+          ) : (
+            <p>Next day locked hai.</p>
+          )}
+        </div>
+      )}
+
+      
+{/* {activeDay !== null && (
+  <div className="day-meal">
+    <h1>{days[activeDay]}</h1>
+    {dayUnlocked.includes(activeDay + 1) ? (
+      <button onClick={unlockNextDay}>Next Day</button>
+    ) : (
+      <p>Next day locked hai.</p>
+    )}
+  </div>
+)} */}
+
 
         {sections.map((section) => (
           <div
@@ -222,6 +241,8 @@ const Menu = () => {
           </div>
         ))}
       </div>
+
+      <FooterHeader />
     </div>
   );
 };
