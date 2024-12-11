@@ -164,6 +164,7 @@ const Menu = () => {
       className="res-break"
         style={{
           marginTop: "180px",
+          marginBottom: "100px",
           padding: "20px",
           backgroundColor: "#f0f0f5",
           scrollBehavior: "smooth",

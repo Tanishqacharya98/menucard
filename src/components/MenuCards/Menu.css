@@ -717,7 +717,7 @@ font-size: 24px;
   height: 60px;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .footer-header .list1 {
   align-items: center;
@@ -756,4 +756,14 @@ font-size: 24px;
   /* mix-blend-mode: multiply; */
   border-radius: 50%;
   align-items: center;
+}
+.footer-header .middle-list {
+    background: linear-gradient(45deg, #2196f3, #1ee994);
+    height: 120px;
+    width: 260px !important;
+    margin-top: -30px;
+    position: relative;
+    border-start-start-radius: 90px;
+    border-top-right-radius: 90px;
+    padding-top: 20px;
 }

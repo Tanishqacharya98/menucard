@@ -7,14 +7,14 @@ const FooterHeader = () => {
             <div className="list1">
                 <ul>
                     <li>
-                    <video src="assets/images/home.mp4" autoPlay muted loop></video>
-                    <a href="/">Home</a></li>
+                    <video src="assets/images/treadmill.mp4" autoPlay muted loop></video>
+                    <a href="/">Exercise</a></li>
                     <li>
                     <video src="assets/images/breakfast.mp4" autoPlay muted loop></video>
                     <a href="/">Breakfast</a></li>
                     <li className='middle-list'>
-                    <video src="assets/images/treadmill.mp4" autoPlay muted loop></video>
-                    <a href="/">Exercise</a></li>
+                    <video src="assets/images/home.mp4" autoPlay muted loop></video>
+                    <a href="/">Home</a></li>
                     <li>
                     <video src="assets/images/yoga.mp4" autoPlay muted loop></video>
                     <a href="/">Meditation</a></li>
